@@ -10,13 +10,15 @@ Il progetto consiste in un server JAVA che riceve un file XML, poi lo invia ad u
 
 - [x] Creare il server RTMP
 - [ ] Setup del server RTMP
+  - [ ] Setup del server RTMP per trasmissione in HDL
 - [x] Creare XML
 - [ ] Creare XSD
 - [ ] Creare Server Java
-  - [x] Connessione
-  - [x] Recupero e parsing del file XML
-  - [ ] Invio del dati file XML al client ( response )
-  - [ ] Ricezione delle request dal client
+  - [x] Connessione e accettazione client
+  - [ ] Gestione singolo client
+  - [ ] Parsing dei dati XML
+    - [ ] Trovo i dati
+    - [ ] Creo file di risposta
 - [ ] Creare Client Java
   - [ ] Connessione
   - [ ] Trasmissione dei dati tra i due end-point
@@ -28,4 +30,9 @@ Il progetto consiste in un server JAVA che riceve un file XML, poi lo invia ad u
   - [ ] Ricezione dei dati dal server
   - [ ] Visualizzazione dei dati  
 
-GUARDA CHATGPT E LE TABELLE SU GOOGLE
+
+## Risorse
+
+- GUARDA CHATGPT E LE TABELLE SU GOOGLE
+- [XML save and modify](https://chat.openai.com/share/4e6a0dce-1e5c-4150-811b-1b1d60c8bf90)
+- [Sockets JS to JAVA](https://chat.openai.com/share/1c773867-ed35-49d9-969e-fa1a7afa8635)

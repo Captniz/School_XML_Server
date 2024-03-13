@@ -1,28 +1,38 @@
 //GLOBAL VARS
-var reqtype = "";
-const socket = new WebSocket("ws://localhost:5567");
-var infos = [];
+var socket = new WebSocket("ws://localhost:8080");
+        
 
 //MAIN
-request("#LIST GROUP");
+sendRequest("#LIST GROUP", "GROUPS");
 
 
 //EVENTS
-socket.onopen = function(event) {
-    console.log("Connected to server");
+socket.onmessage = function(event) {
+    var data = event.data;
+    var divId = event.target.rtype;
+    
+    if (rtype == "example") {
+        //Do something
+    }
 };
 
-socket.onmessage = function(event) {
-    //TODO: parse the message or switch to http requests
-}
+socket.onopen = function(event) {
+    console.log("Connected to server.");
+};
+
+socket.onclose = function(event) {
+    console.log("Connection closed.");
+    socket.send("#EXIT");
+};
 
 window.onbeforeunload = function(e){
     socket.send("#EXIT");
-    socket.close();
 };
 
 //FUNCS
-void function request(req){
+function sendRequest(req, rtype) {
     socket.send(req);
-    reqtype = req;
+    socket.onmessage.type = rtype;
 }
+
+//EXAMPLES

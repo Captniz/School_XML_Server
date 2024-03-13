@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<albums>
+<streaming>
     <group genre="Gaming">
         <imagePath>./src/streamers/gr1.PNG</imagePath>
         <followers>120.000</followers>
@@ -53,4 +53,4 @@
             </streamer>
         </streamers>
     </group>
-</albums>
+</streaming>
