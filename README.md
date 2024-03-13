@@ -27,3 +27,5 @@ Il progetto consiste in un server JAVA che riceve un file XML, poi lo invia ad u
   - [ ] Connessione
   - [ ] Ricezione dei dati dal server
   - [ ] Visualizzazione dei dati  
+
+GUARDA CHATGPT E LE TABELLE SU GOOGLE
