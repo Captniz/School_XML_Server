@@ -18,7 +18,10 @@ public class ClientManager extends Thread {
             this.clientSocket = clientSocket;
             out = new PrintWriter(clientSocket.getOutputStream(), true);
             in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-            xml = new Server.XmlManager("../src/Streamers.xml","../src/Response.xml");
+
+            //! QUI SI POTREBBE CAMBIARE PER OGNI CLIENT IL FILE DI RESPONSE PER NON FARE CASINI
+            xml = new XmlManager("../src/Streamers.xml", "../src/ResponseTemplate.xml", "../src/Response.xml");
+        
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -40,17 +43,17 @@ public class ClientManager extends Thread {
                         return;
 
                     case "#LIST GROUP":
-                        //TODO:    
+                        // TODO:
 
                         break;
 
                     case "#LIST STREAM":
-                        //TODO:    
+                        // TODO:
 
                         break;
 
                     case "#SHOW STREAM":
-                        //TODO:
+                        // TODO:
 
                         break;
 

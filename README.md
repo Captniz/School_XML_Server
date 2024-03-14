@@ -19,6 +19,8 @@ Il progetto consiste in un server JAVA che riceve un file XML, poi lo invia ad u
   - [x] Parsing dei dati XML
     - [x] Trovo i dati
     - [x] Creo file di risposta
+    - [ ] Valuta se è necessario creare il file RESPONSE XML o posso semplicemente inviare i dati
+      - [ ] Nel caso aggiungi la gestione dei file sul lato ClientManager come nel commento
 - [ ] Creare Client Java
   - [ ] Connessione
   - [ ] Trasmissione dei dati tra i due end-point
@@ -30,6 +32,11 @@ Il progetto consiste in un server JAVA che riceve un file XML, poi lo invia ad u
   - [ ] Ricezione dei dati dal server
   - [ ] Visualizzazione dei dati  
 
+## Possibili agginunte
+
+ - [ ] Chat
+ - [ ] Trova un modo per utilizzare il client java
+ - [ ] Crea un hub per la gestione degli streamer
 
 ## Risorse
 
