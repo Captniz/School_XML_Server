@@ -1,11 +1,8 @@
-package Server;
-
 import java.util.*;
 import java.io.*;
+
 import javax.xml.parsers.*;
 import javax.xml.transform.*;
-import javax.xml.transform.dom.*;
-import javax.xml.transform.stream.*;
 
 import org.w3c.dom.*;
 
@@ -13,25 +10,46 @@ import org.w3c.dom.*;
  * Manages the XML file containing the data for the streaming service.
  */
 public class XmlManager {
-    DocumentBuilder db;
-    
-    File RESPONSEfile;
-    
-    File DATAfile;
-    Document DATAdoc;
-    Node DATAroot;
+    // #region[#359fa744] //! CONSTRUCTOR AND ATTRIBUTES
 
-    public XmlManager(String Dfile, String Rfile) throws Exception {
+    private DocumentBuilder db;
+
+    String ResponseLocation;
+
+    private File ResponseTemplatefile;
+    private Document RESPONSEdoc;
+    private Node RESPONSEroot;
+
+    private File DATAfile;
+    private Document DATAdoc;
+    private Node DATAroot;
+
+    /**
+     * Constructor for the XmlManager class.
+     * 
+     * @param Dfile     <code>String</code> containing the path to the Data XML file
+     * @param RTfile    <code>String</code> containing the path to the Response
+     *                  Template XML file
+     * @param Rlocation <code>String</code> containing the path to the Response XML
+     *                  file
+     */
+    public XmlManager(String Dfile, String RTfile, String Rlocation) throws Exception {
         db = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-        
-        RESPONSEfile = new File(Rfile);
+
+        ResponseTemplatefile = new File(RTfile);
+        RESPONSEdoc = db.parse(ResponseTemplatefile);
+        RESPONSEroot = RESPONSEdoc.getDocumentElement();
 
         DATAfile = new File(Dfile);
         DATAdoc = db.parse(DATAfile);
         DATAroot = DATAdoc.getDocumentElement();
-    }
 
-    
+        ResponseLocation = Rlocation;
+    }
+    // #endregion
+
+    // #region[#8DA10144] //! HELPER METHODS
+
     /**
      * Returns all the ELEMENT nodes with the given name in the XML file.
      * 
@@ -40,8 +58,8 @@ public class XmlManager {
      * @return <code>ArrayList<Node></code> containing all the nodes with the given
      *         name
      */
-    ArrayList<Node> findNodes(String nomeNodo) {
-        NodeList l = DATAdoc.getElementsByTagName(nomeNodo);
+    private ArrayList<Node> findNodes(Document doc, String nomeNodo) {
+        NodeList l = doc.getElementsByTagName(nomeNodo);
         ArrayList<Node> nodes = new ArrayList<Node>();
 
         for (int i = 0; i < l.getLength(); i++) {
@@ -63,7 +81,7 @@ public class XmlManager {
      * @return <code>Node</code> containing the first node with the given name that
      *         is a child of the given node
      */
-    Node findChildNode(Node nodo, String nomeNodo) {
+    private Node findChildNode(Node nodo, String nomeNodo) {
         NodeList l = nodo.getChildNodes();
         Node n = null;
 
@@ -84,7 +102,7 @@ public class XmlManager {
      * @return <code>ArrayList<Node></code> containing all the children of the given
      *         node
      */
-    ArrayList<Node> findChildNodes(Node nodo) {
+    private ArrayList<Node> findChildNodes(Node nodo) {
         NodeList l = nodo.getChildNodes();
         ArrayList<Node> nodes = new ArrayList<Node>();
 
@@ -97,30 +115,124 @@ public class XmlManager {
         return nodes;
     }
 
-    void getGroupData() {
-        //TODO
-    }
+    /**
+     * Returns the first ELEMENT node with the given attribute that is a child of
+     * the given node.
+     * 
+     * @param nodo      <code>Node</code> containing the node to be searched
+     * @param attrName  <code>String</code> containing the name of the attribute to
+     *                  be searched
+     * @param attrValue <code>String</code> containing the value of the attribute to
+     *                  be searched
+     * @return <code>Node</code> containing the first node with the given attribute
+     */
+    private Node findChildWithAttr(Node nodo, String attrName, String attrValue) {
+        NodeList l = nodo.getChildNodes();
+        Node n = null;
 
-    void getStreams(String groupName) {
-        //TODO
+        for (int i = 0; i < l.getLength(); i++) {
+            if (l.item(i).getNodeType() == Node.ELEMENT_NODE) {
+                NamedNodeMap attr = l.item(i).getAttributes();
+                if (attr.getNamedItem(attrName).getNodeValue().equals(attrValue)) {
+                    n = l.item(i);
+                    break;
+                }
+            }
+        }
+
+        return n;
     }
 
     /**
-
+     * Returns the value of the first TEXT_NODE that is a child of the given node.
+     * 
+     * @param nodo <code>Node</code> containing the node to be searched
+     * @return <code>String</code> containing the value of the first text node that
+     *         is a child of the given node
      */
-    void getStreamData(String groupName, String streamName) {
-        //TODO
-    }
-
-    /**
-
-     */
-    void saveResponse() throws Exception {
+    private void saveResponse() throws Exception {
         TransformerFactory.newInstance().newTransformer().transform(
-            new javax.xml.transform.dom.DOMSource(DATAdoc),
-            new javax.xml.transform.stream.StreamResult(RESPONSEfile));
+                new javax.xml.transform.dom.DOMSource(RESPONSEdoc),
+                new javax.xml.transform.stream.StreamResult(ResponseLocation));
 
-        DATAdoc = db.parse(DATAfile);
-        DATAroot = DATAdoc.getDocumentElement();
+        RESPONSEdoc = db.parse(ResponseTemplatefile);
+        RESPONSEroot = RESPONSEdoc.getDocumentElement();
     }
+
+    // #endregion
+
+    // #region[#DFA00044] //! PUBLIC METHODS
+
+    /**
+     * Returns in the file for the RESPONSE all the groups from the DATA file,
+     * whitout superficial info.
+     */
+    public void getGroupData() {
+        ArrayList<Node> gruppi = findNodes(DATAdoc, "group");
+        for (Node gruppo : gruppi) {
+            Element importedGruppo = (Element) RESPONSEdoc.importNode(gruppo.cloneNode(true), true);
+            RESPONSEroot.appendChild(importedGruppo);
+        }
+
+        gruppi = findNodes(RESPONSEdoc, "group");
+
+        for (Node gruppo : gruppi) {
+            gruppo.removeChild(findChildNode(gruppo, "streamers"));
+        }
+
+        try {
+            saveResponse();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Returns in the file for the RESPONSE all the streams from the DATA file for
+     * the given group, whitout superficial info.
+     * 
+     * @param groupName <code>String</code> containing the name of the group to be
+     *                  searched
+     */
+    public void getStreams(String groupName) {
+        Node streams = findChildNode(findChildWithAttr(DATAroot, "genre", groupName), "streamers");
+
+        Element importedStreamers = (Element) RESPONSEdoc.importNode(streams.cloneNode(true), true);
+        RESPONSEroot.appendChild(importedStreamers);
+
+        ArrayList<Node> streamers = findNodes(RESPONSEdoc, "streamer");
+
+        for (Node streamer : streamers) {
+            streamer.removeChild(findChildNode(streamer, "metadata"));
+        }
+        try {
+            saveResponse();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Returns in the file for the RESPONSE all the data from the DATA file for the
+     * given group and stream.
+     * 
+     * @param groupName  <code>String</code> containing the name of the group to be
+     *                   searched
+     * @param streamName <code>String</code> containing the name of the stream to be
+     *                   searched
+     */
+    public void getStreamData(String groupName, String streamName) {
+        Node stream = findChildWithAttr(findChildNode(findChildWithAttr(DATAroot, "genre", groupName), "streamers"),
+                "name", streamName);
+
+        Element importedStream = (Element) RESPONSEdoc.importNode(stream.cloneNode(true), true);
+        RESPONSEroot.appendChild(importedStream);
+
+        try {
+            saveResponse();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    // #endregion
 }

@@ -16,9 +16,9 @@ Il progetto consiste in un server JAVA che riceve un file XML, poi lo invia ad u
 - [ ] Creare Server Java
   - [x] Connessione e accettazione client
   - [ ] Gestione singolo client
-  - [ ] Parsing dei dati XML
-    - [ ] Trovo i dati
-    - [ ] Creo file di risposta
+  - [x] Parsing dei dati XML
+    - [x] Trovo i dati
+    - [x] Creo file di risposta
 - [ ] Creare Client Java
   - [ ] Connessione
   - [ ] Trasmissione dei dati tra i due end-point

@@ -1,2 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <response>
+    <streamer name="s1">
+        <content>Webcam</content>
+        <followers>20.000</followers>
+        <language>Italian</language>
+        <metadata>
+            <streamIp>127.0.0.1</streamIp>
+            <imagePath>./src/streamers/str1.PNG</imagePath>
+        </metadata>
+    </streamer>
 </response>

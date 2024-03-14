@@ -5,20 +5,19 @@
         <imagePath>./src/streamers/gr1.PNG</imagePath>
         <followers>120.000</followers>
         <streamers>
-            <streamer>
-                <name>Streamer1</name>
+            <streamer name="s1">
                 <content>Webcam</content>
                 <followers>20.000</followers>
-                <language>English</language>
+                <language>Italian</language>
                 <metadata>
                     <streamIp>127.0.0.1</streamIp>
                     <imagePath>./src/streamers/str1.PNG</imagePath>
                 </metadata>
             </streamer>
-            <streamer>
+            <streamer name="s2">
                 <name>Streamer2</name>
+                <content>Screen</content>
                 <followers>30.000</followers>
-                <content>Italian</content>
                 <language>English</language>
                 <metadata>
                     <streamPath>127.0.0.1</streamPath>
@@ -31,20 +30,20 @@
         <imagePath>./src/streamers/gr2.PNG</imagePath>
         <followers>20.000</followers>
         <streamers>
-            <streamer>
+            <streamer name="s3">
                 <name>Streamer3</name>
-                <followers>10.000</followers>
                 <content>Webcam</content>
+                <followers>10.000</followers>
                 <language>English</language>
                 <metadata>
                     <streamPath>127.0.0.1</streamPath>
                     <imagePath>./src/streamers/str3.PNG</imagePath>
                 </metadata>
             </streamer>
-            <streamer>
+            <streamer name="s4">
                 <name>Streamer4</name>
-                <followers>5.000</followers>
                 <content>Italian</content>
+                <followers>5.000</followers>
                 <language>English</language>
                 <metadata>
                     <streamPath>127.0.0.1</streamPath>
