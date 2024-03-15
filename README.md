@@ -38,6 +38,7 @@ Il progetto consiste in un server JAVA che riceve un file XML, poi lo invia ad u
  - [ ] Trova un modo per utilizzare il client java
  - [ ] Crea un hub per la gestione degli streamer
  - [ ] Possibilita di spostare su CLI che sarebbe piu figo
+ - [ ] Live viewers & sub count
 
 ## Risorse
 
