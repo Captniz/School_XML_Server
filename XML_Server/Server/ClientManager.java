@@ -1,26 +1,31 @@
 package Server;
 
 import java.io.*;
-import java.util.*;
 import java.net.*;
 
 /**
  * Manages the clients connected to the server.
  */
 public class ClientManager extends Thread {
+    File xmlFile;
     Socket clientSocket;
-    PrintWriter out;
+    OutputStream out;
     BufferedReader in;
+    FileInputStream fis;
     XmlManager xml;
+    byte[] buffer;
 
     public ClientManager(Socket clientSocket) {
         try {
             this.clientSocket = clientSocket;
-            out = new PrintWriter(clientSocket.getOutputStream(), true);
+            out = clientSocket.getOutputStream();
             in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
 
-            //! QUI SI POTREBBE CAMBIARE PER OGNI CLIENT IL FILE DI RESPONSE PER NON FARE CASINI
+            xmlFile = new File("../src/Response.xml");
             xml = new XmlManager("../src/Streamers.xml", "../src/ResponseTemplate.xml", "../src/Response.xml");
+            fis = new FileInputStream(xmlFile);
+            
+            buffer = new byte[(int) xmlFile.length()];
         
         } catch (Exception e) {
             e.printStackTrace();
@@ -31,33 +36,35 @@ public class ClientManager extends Thread {
     @Override
     public void run() {
         String req;
-        String tmp;
 
         try {
             for (;;) {
                 req = in.readLine();
 
-                switch (req) {
+                switch (req.split(" ")[0]) {
                     case "#EXIT":
                         killClient();
                         return;
 
-                    case "#LIST GROUP":
-                        // TODO:
-
+                    case "#LIST_GROUP":
+                        xml.getGroupData();
+                        sendData();
                         break;
 
-                    case "#LIST STREAM":
-                        // TODO:
-
+                    case "#LIST_STREAMS":
+                        String[] params = getRequestParams(req);
+                        xml.getStreams(params[0]);
+                        sendData();
                         break;
 
-                    case "#SHOW STREAM":
-                        // TODO:
-
+                    case "#SHOW_STREAM":
+                        String[] params2 = getRequestParams(req);
+                        xml.getStreamData(params2[0], params2[1]);
+                        sendData();
                         break;
 
                     default:
+                        System.out.println("Invalid request");
                         break;
                 }
 
@@ -67,25 +74,6 @@ public class ClientManager extends Thread {
             e.printStackTrace();
             killClient();
             return;
-        }
-    }
-
-    /**
-     * Sends an image to the client.
-     * 
-     * @param path <code>String</code> containing the path of the image to be sent
-     */
-    void sendImage(String path) {
-        try {
-            File file = new File(path);
-            FileInputStream fis = new FileInputStream(file);
-            byte[] data = new byte[(int) file.length()];
-            fis.read(data);
-            fis.close();
-
-            out.println(data);
-        } catch (Exception e) {
-            e.printStackTrace();
         }
     }
 
@@ -107,17 +95,19 @@ public class ClientManager extends Thread {
     }
 
     /**
-     * Returns the data relative to the request made by the client.
-     * 
-     * @return <code>String</code> containing the data of the request
+     * Sends the data to the client.
      */
-    String[] getRequestData(String req) {
-        String[] tmp = req.split(" ");
-        String[] data = new String[tmp.length - 2];
-        for (int i = 2; i < tmp.length; i++) {
-            data[i - 2] = tmp[i];
-        }
+    void sendData() throws IOException{
+        xmlFile = new File("../src/Response.xml");
+        fis.read(buffer);
+        out.write(buffer, 0, buffer.length);
+        out.flush();
+    }
 
-        return data;
+   
+    String[] getRequestParams(String req) {
+        return req.substring(req.indexOf(" ") + 1).split(" ");
     }
 }
+
+

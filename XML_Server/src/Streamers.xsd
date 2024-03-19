@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="streaming">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="group" maxOccurs="unbounded" minOccurs="0">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element type="xs:string" name="imagePath"/>
+              <xs:element type="xs:float" name="followers"/>
+              <xs:element name="streamers">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="streamer" maxOccurs="unbounded" minOccurs="0">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element type="xs:string" name="name" minOccurs="0"/>
+                          <xs:element type="xs:string" name="content"/>
+                          <xs:element type="xs:float" name="followers"/>
+                          <xs:element type="xs:string" name="language"/>
+                          <xs:element name="metadata">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element type="xs:string" name="streamIp" minOccurs="0"/>
+                                <xs:element type="xs:string" name="streamPath" minOccurs="0"/>
+                                <xs:element type="xs:string" name="imagePath"/>
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                        </xs:sequence>
+                        <xs:attribute type="xs:string" name="name" use="optional"/>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+            <xs:attribute type="xs:string" name="genre" use="optional"/>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

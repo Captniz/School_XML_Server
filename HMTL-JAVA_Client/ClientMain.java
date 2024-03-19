@@ -2,13 +2,10 @@ import java.io.*;
 import java.util.*;
 import java.net.*;
 
-import javax.xml.parsers.*;
-import org.w3c.dom.*;
-
 /**
  * Client for a streaming service.
  */
-public class ProgettoClientXML {
+public class ClientMain {
 
     // Static & Global variables
     static final int PORT_HTML = 5567;
@@ -26,15 +23,9 @@ public class ProgettoClientXML {
 
             System.out.println("Relay started ...");
 
-            OneWayStream relayHtoX = new OneWayStream(
-                new BufferedReader(new InputStreamReader(HTMLserver.getInputStream())),
-                new PrintWriter(XMLserver.getOutputStream(), true)
-            );
+            OneWayStream relayHtoX = new OneWayStream(HTMLserver.getInputStream(),XMLserver.getOutputStream());
 
-            OneWayStream relayXtoH = new OneWayStream(
-                new BufferedReader(new InputStreamReader(XMLserver.getInputStream())),
-                new PrintWriter(HTMLserver.getOutputStream(), true)
-            );
+            OneWayStream relayXtoH = new OneWayStream(XMLserver.getInputStream(),HTMLserver.getOutputStream());
 
             relayHtoX.start();
             relayXtoH.start();
@@ -46,10 +37,10 @@ public class ProgettoClientXML {
 }
 
 class OneWayStream extends Thread {
-    BufferedReader in;
-    PrintWriter out;
+    InputStream in;
+    OutputStream out;
 
-    OneWayStream(BufferedReader in, PrintWriter out) {
+    OneWayStream(InputStream in, OutputStream out) {
         this.in = in;
         this.out = out;
     }
@@ -58,7 +49,7 @@ class OneWayStream extends Thread {
     public void run() {
         for (;;) {
             try {
-                out.println(in.readLine());
+                out.write(in.read());
             } catch (Exception e) {
                 System.out.println("Errore Server");
                 return;
