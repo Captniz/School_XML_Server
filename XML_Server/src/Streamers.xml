@@ -2,7 +2,7 @@
 
 <streaming>
     <group genre="Gaming">
-        <imagePath>./src/streamers/gr1.PNG</imagePath>
+        <imagePath>../XML_Server/src/groups/gr1.PNG</imagePath>
         <followers>120.000</followers>
         <streamers>
             <streamer name="s1">
@@ -11,7 +11,7 @@
                 <language>Italian</language>
                 <metadata>
                     <streamIp>127.0.0.1</streamIp>
-                    <imagePath>./src/streamers/str1.PNG</imagePath>
+                    <imagePath>../XML_Server/src/streamers/str1.PNG</imagePath>
                 </metadata>
             </streamer>
             <streamer name="s2">
@@ -21,13 +21,13 @@
                 <language>English</language>
                 <metadata>
                     <streamPath>127.0.0.1</streamPath>
-                    <imagePath>./src/streamers/str2.PNG</imagePath>
+                    <imagePath>../XML_Server/src/streamers/str2.PNG</imagePath>
                 </metadata>
             </streamer>
         </streamers>
     </group>
     <group genre="Hot Tub">
-        <imagePath>./src/streamers/gr2.PNG</imagePath>
+        <imagePath>../XML_Server/src/groups/gr2.PNG</imagePath>
         <followers>20.000</followers>
         <streamers>
             <streamer name="s3">
@@ -37,7 +37,7 @@
                 <language>English</language>
                 <metadata>
                     <streamPath>127.0.0.1</streamPath>
-                    <imagePath>./src/streamers/str3.PNG</imagePath>
+                    <imagePath>../XML_Server/src/streamers/str3.PNG</imagePath>
                 </metadata>
             </streamer>
             <streamer name="s4">
@@ -47,7 +47,7 @@
                 <language>English</language>
                 <metadata>
                     <streamPath>127.0.0.1</streamPath>
-                    <imagePath>./src/streamers/str4.PNG</imagePath>
+                    <imagePath>../XML_Server/src/streamers/str4.PNG</imagePath>
                 </metadata>
             </streamer>
         </streamers>

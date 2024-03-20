@@ -5,6 +5,6 @@
                 <language>Italian</language>
                 <metadata>
                     <streamIp>127.0.0.1</streamIp>
-                    <imagePath>./src/streamers/str1.PNG</imagePath>
+                    <imagePath>../XML_Server/src/streamers/str1.PNG</imagePath>
                 </metadata>
             </streamer></response>

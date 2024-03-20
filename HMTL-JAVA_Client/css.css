@@ -42,7 +42,15 @@ body{
 }
 #text-container {
     display: block;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
+
+img {
+    padding: 20px;
+}
+
 
 .button {
     display: block;

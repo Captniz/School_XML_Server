@@ -115,32 +115,29 @@ public class XmlManager {
         return nodes;
     }
 
-    /**
-     * Returns the first ELEMENT node with the given attribute that is a child of
-     * the given node.
-     * 
-     * @param nodo      <code>Node</code> containing the node to be searched
-     * @param attrName  <code>String</code> containing the name of the attribute to
-     *                  be searched
-     * @param attrValue <code>String</code> containing the value of the attribute to
-     *                  be searched
-     * @return <code>Node</code> containing the first node with the given attribute
-     */
-    private Node findChildWithAttr(Node nodo, String attrName, String attrValue) {
-        NodeList l = nodo.getChildNodes();
-        Node n = null;
+    
+    private Node findNodeWithAttr(Node nodo, String attrName, String attrValue) {
+        if (nodo == null) {
+            return null;
+        }
 
-        for (int i = 0; i < l.getLength(); i++) {
-            if (l.item(i).getNodeType() == Node.ELEMENT_NODE) {
-                NamedNodeMap attr = l.item(i).getAttributes();
-                if (attr.getNamedItem(attrName).getNodeValue().equals(attrValue)) {
-                    n = l.item(i);
-                    break;
-                }
+        if (nodo.getNodeType() == Node.ELEMENT_NODE) {
+            Element element = (Element) nodo;
+            if (element.getAttribute(attrName).equals(attrValue)) {
+                return element;
             }
         }
 
-        return n;
+        NodeList childNodes = nodo.getChildNodes();
+        for (int i = 0; i < childNodes.getLength(); i++) {
+            Node childNode = childNodes.item(i);
+            Node foundNode = findNodeWithAttr(childNode, attrName, attrValue);
+            if (foundNode != null) {
+                return foundNode;
+            }
+        }
+
+        return null;
     }
 
     /**
@@ -195,16 +192,13 @@ public class XmlManager {
      *                  searched
      */
     public void getStreams(String groupName) {
-        Node streams = findChildNode(findChildWithAttr(DATAroot, "genre", groupName), "streamers");
+        Node streams = findChildNode(findNodeWithAttr(DATAroot, "genre", groupName), "streamers");
 
         Element importedStreamers = (Element) RESPONSEdoc.importNode(streams.cloneNode(true), true);
         RESPONSEroot.appendChild(importedStreamers);
 
         ArrayList<Node> streamers = findNodes(RESPONSEdoc, "streamer");
 
-        for (Node streamer : streamers) {
-            streamer.removeChild(findChildNode(streamer, "metadata"));
-        }
         try {
             saveResponse();
         } catch (Exception e) {
@@ -216,14 +210,11 @@ public class XmlManager {
      * Returns in the file for the RESPONSE all the data from the DATA file for the
      * given group and stream.
      * 
-     * @param groupName  <code>String</code> containing the name of the group to be
-     *                   searched
      * @param streamName <code>String</code> containing the name of the stream to be
      *                   searched
      */
-    public void getStreamData(String groupName, String streamName) {
-        Node stream = findChildWithAttr(findChildNode(findChildWithAttr(DATAroot, "genre", groupName), "streamers"),
-                "name", streamName);
+    public void getStreamData(String streamName) {
+        Node stream = findNodeWithAttr(DATAroot, "name", streamName);
 
         Element importedStream = (Element) RESPONSEdoc.importNode(stream.cloneNode(true), true);
         RESPONSEroot.appendChild(importedStream);

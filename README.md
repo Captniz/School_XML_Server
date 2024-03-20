@@ -24,20 +24,22 @@ Il progetto consiste in un server JAVA che riceve un file XML, poi lo invia ad u
 - [x] Creare Client Java
   - [x] Connessione
   - [x] Trasmissione dei dati tra i due end-point
-- [ ] Creare la pagina HTML
+- [x] Creare la pagina HTML
   - [x] CSS  
-  - [ ] JS
+  - [x] JS
+    - [ ] Quando chiamo SHOWSTREAM fai si che il server update del numero di user live
   - [ ] HTML
-  - [ ] Connessione
-  - [ ] Ricezione dei dati dal server
-  - [ ] Visualizzazione dei dati  
+    - [ ] Tasto back che torna ai gruppi
+  - [x] Connessione
+  - [x] Ricezione dei dati dal server
+  - [x] Visualizzazione dei dati  
 
 ## Possibili agginunte
+
 
  - [ ] Chat
  - [ ] Trova un modo per utilizzare il client java
  - [ ] Crea un hub per la gestione degli streamer
- - [ ] Possibilita di spostare su CLI che sarebbe piu figo
  - [ ] Live viewers & sub count
 
 ## Risorse

@@ -1,8 +1,8 @@
-package Server;
-
 import java.io.*;
 import java.net.*;
-
+import java.security.NoSuchAlgorithmException;
+import java.util.Base64;
+import java.util.Scanner;
 /**
  * Manages the clients connected to the server.
  */
@@ -40,40 +40,43 @@ public class ClientManager extends Thread {
         try {
             for (;;) {
                 req = in.readLine();
+                System.out.println(req);
 
                 switch (req.split(" ")[0]) {
                     case "#EXIT":
+                        System.out.println("Client disconnected");
                         killClient();
                         return;
 
                     case "#LIST_GROUP":
+                        System.out.println("SENDING LIST_GROUP");
                         xml.getGroupData();
                         sendData();
                         break;
 
                     case "#LIST_STREAMS":
-                        String[] params = getRequestParams(req);
-                        xml.getStreams(params[0]);
+                        System.out.println("SENDING LIST_STREAMS");
+                        xml.getStreams(getRequestParams(req));
                         sendData();
                         break;
 
                     case "#SHOW_STREAM":
-                        String[] params2 = getRequestParams(req);
-                        xml.getStreamData(params2[0], params2[1]);
+                        System.out.println("SENDING SHOW_STREAM");
+                        xml.getStreamData(getRequestParams(req));
                         sendData();
                         break;
 
                     default:
                         System.out.println("Invalid request");
+                        System.out.println(req);
                         break;
                 }
 
             }
         } catch (Exception e) {
-            System.out.println("Errore ClientManager");
+            System.out.println("Client rimosso da remoto");
             e.printStackTrace();
             killClient();
-            return;
         }
     }
 
@@ -98,15 +101,28 @@ public class ClientManager extends Thread {
      * Sends the data to the client.
      */
     void sendData() throws IOException{
+        out = clientSocket.getOutputStream();
         xmlFile = new File("../src/Response.xml");
-        fis.read(buffer);
-        out.write(buffer, 0, buffer.length);
-        out.flush();
-    }
+        fis = new FileInputStream(xmlFile);
 
+        byte[] buffer = new byte[4096];
+        int bytesRead;
+        while ((bytesRead = fis.read(buffer)) > 0){
+            out.write(buffer, 0, bytesRead);    
+            out.flush();
+        }
+        System.out.println("Data sent");
+
+    }
    
-    String[] getRequestParams(String req) {
-        return req.substring(req.indexOf(" ") + 1).split(" ");
+    /**
+     * Gets the parameters of the request.
+     * 
+     * @param req <code>String</code> containing the request
+     * @return <code>String</code> containing the parameters of the request
+     */
+    String getRequestParams(String req) {
+        return req.substring(req.indexOf(" ") + 1);
     }
 }
 

@@ -1,5 +1,4 @@
-package Server;
-
+import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
@@ -20,7 +19,7 @@ public class ServerMain {
             ServerSocket serverSocket = new ServerSocket(PORT);
             Socket clientSocket;
             ClientManager clientmanager;
-            System.out.println("Server started . . .");
+            System.out.println("Server started on " + InetAddress.getLocalHost() + ":" + PORT + " . . . ");
 
             // Accept and manage clients
             while (true) {
