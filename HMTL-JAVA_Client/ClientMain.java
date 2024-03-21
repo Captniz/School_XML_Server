@@ -10,6 +10,7 @@ import org.java_websocket.server.WebSocketServer;
  * Client for a streaming service.
  */
 public class ClientMain extends WebSocketServer{
+    // #region[#359fa744] //! ATTRIBUTES - MAIN - CONSTRUCTOR
 
     Socket XMLserver;
     PrintWriter out;
@@ -48,6 +49,9 @@ public class ClientMain extends WebSocketServer{
         }
 	}
 
+    // #endregion
+
+    // #region[#8DA10144] //!EVENTS/METHODS
 	@Override
 	public void onOpen(WebSocket conn, ClientHandshake handshake) {
 		System.out.println("new connection to " + conn.getRemoteSocketAddress());
@@ -96,4 +100,5 @@ public class ClientMain extends WebSocketServer{
 	public void onStart() {
 		System.out.println("server started successfully");
 	}
+    // #endregion
 }

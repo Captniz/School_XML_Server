@@ -1,10 +1,10 @@
-//GLOBAL VARS
+// #region[#359fa744] //!GLOBAL VARS
 var ws = new WebSocket("ws://localhost:5567");
 var reqType = "";
 
-//MAIN
+// #endregion
 
-//EVENTS
+// #region[#8DA10144] //!EVENTS
 ws.onmessage = function(event) {
     var data = event.data;
     var doc = parseXML(data);
@@ -94,7 +94,9 @@ window.onbeforeunload = function(e){
     ws.send("#EXIT");
 };
 
-//FUNCS
+// #endregion
+
+// #region[#DFA00044] //!FUNCS
 function sendRequest(req) {
     console.log("Sending request: " + req);
     ws.send(req);
@@ -139,4 +141,4 @@ function waitForConnection(interval) {
         }, interval);
     }
 };
-//EXAMPLES
+// #endregion

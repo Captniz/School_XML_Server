@@ -1,12 +1,12 @@
 import java.io.*;
 import java.net.*;
-import java.security.NoSuchAlgorithmException;
-import java.util.Base64;
-import java.util.Scanner;
+
 /**
  * Manages the clients connected to the server.
  */
 public class ClientManager extends Thread {
+    // #region[#359fa744] //! CONSTRUCTOR AND ATTRIBUTES
+
     File xmlFile;
     Socket clientSocket;
     OutputStream out;
@@ -16,6 +16,7 @@ public class ClientManager extends Thread {
     byte[] buffer;
 
     public ClientManager(Socket clientSocket) {
+
         try {
             this.clientSocket = clientSocket;
             out = clientSocket.getOutputStream();
@@ -24,15 +25,18 @@ public class ClientManager extends Thread {
             xmlFile = new File("../src/Response.xml");
             xml = new XmlManager("../src/Streamers.xml", "../src/ResponseTemplate.xml", "../src/Response.xml");
             fis = new FileInputStream(xmlFile);
-            
+
             buffer = new byte[(int) xmlFile.length()];
-        
+
         } catch (Exception e) {
             e.printStackTrace();
         }
 
     }
 
+    // #endregion
+
+    // #region[#8DA10144] //! MAIN/RUN
     @Override
     public void run() {
         String req;
@@ -80,6 +84,9 @@ public class ClientManager extends Thread {
         }
     }
 
+    // #endregion
+
+    // #region[#DFA00044] //! HELPER METHODS
     /**
      * Kills the client and removes it from the list of active clients in the
      * streaming service.
@@ -100,21 +107,21 @@ public class ClientManager extends Thread {
     /**
      * Sends the data to the client.
      */
-    void sendData() throws IOException{
+    void sendData() throws IOException {
         out = clientSocket.getOutputStream();
         xmlFile = new File("../src/Response.xml");
         fis = new FileInputStream(xmlFile);
 
         byte[] buffer = new byte[4096];
         int bytesRead;
-        while ((bytesRead = fis.read(buffer)) > 0){
-            out.write(buffer, 0, bytesRead);    
+        while ((bytesRead = fis.read(buffer)) > 0) {
+            out.write(buffer, 0, bytesRead);
             out.flush();
         }
         System.out.println("Data sent");
 
     }
-   
+
     /**
      * Gets the parameters of the request.
      * 
@@ -124,6 +131,6 @@ public class ClientManager extends Thread {
     String getRequestParams(String req) {
         return req.substring(req.indexOf(" ") + 1);
     }
+
+    // #endregion
 }
-
-

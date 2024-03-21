@@ -2,7 +2,10 @@
 
 ## Descrizione
 
-Il progetto consiste in un server JAVA che riceve un file XML, poi lo invia ad un client JAVA che lo invia ad una pagina HTML. La pagina HTML riceve i dati e visualizza in tempo reale una live streaming.
+> Il progetto consiste in un server JAVA che riceve un file XML, poi lo invia ad un client JAVA che lo invia ad una pagina HTML.  
+> La pagina HTML riceve i dati e visualizza in tempo reale una live streaming.  
+>   
+> **Questo porgetto non ha alcun senso logico ed è esclusivamente a scopo didattico.**
 
 ![alt text](Scheme.svg)
 
@@ -16,9 +19,9 @@ Il progetto consiste in un server JAVA che riceve un file XML, poi lo invia ad u
   - [x] CLIENT JAVA
     - [x] Connessione con XML server
     - [x] Connessione con JS WebSockets
-  - [ ] HTML
-    - [ ] Rimpiazza le immagini
-    - [ ] Tasto BACK che torna ai gruppi
+  - [x] HTML
+    - [x] Rimpiazza le immagini
+    - [x] Tasto BACK che torna ai gruppi
   - [x] CSS
   - [ ] JS
     - [ ] Quando chiamo SHOWSTREAM fai si che il server update del numero di user live
@@ -32,10 +35,10 @@ Il progetto consiste in un server JAVA che riceve un file XML, poi lo invia ad u
   - [x] CLIENT MANAGER
     - [x] Gestione singolo client
 - [ ] Documentazione
-  - [ ] Documenta
-  - [ ] Dividi in sezioni
+  - [x] Documenta
+  - [x] Dividi in sezioni
   - [ ] Semplifica
-  - [ ] Finisci README
+  - [x] Finisci README
 
 ## Possibili agginunte
 

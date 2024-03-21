@@ -8,9 +8,14 @@ import java.util.ArrayList;
  * request.
  */
 public class ServerMain {
-   // Static & Global variables
+    // #region[#359fa744] //! GLOBAL/STATIC VARS
+
     static final int PORT = 5566;
     public static ArrayList<ClientManager> clients = new ArrayList<ClientManager>();
+
+    // #endregion
+
+    // #region[#8DA10144] //! MAIN
 
     public static void main(String[] args) {
         try {
@@ -36,6 +41,10 @@ public class ServerMain {
         }
     }
 
+    // #endregion
+
+    // #region[#DFA00044] //! METHODS
+
     /**
      * Removes a client from the list of active clients in the streaming service.
      * 
@@ -51,4 +60,6 @@ public class ServerMain {
             }
         }
     }
+
+    // #endregion
 }
