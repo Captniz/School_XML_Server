@@ -33,6 +33,7 @@ Il progetto consiste in un server JAVA che riceve un file XML, poi lo invia ad u
   - [x] Connessione
   - [x] Ricezione dei dati dal server
   - [x] Visualizzazione dei dati  
+  - [ ] Rimpiazza le immagini
 
 ## Possibili agginunte
 

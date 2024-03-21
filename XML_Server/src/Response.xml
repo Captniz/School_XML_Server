@@ -4,7 +4,7 @@
                 <followers>20.000</followers>
                 <language>Italian</language>
                 <metadata>
-                    <streamIp>127.0.0.1</streamIp>
+                    <streamIp>http://localhost:8080/hls/simo.m3u8</streamIp>
                     <imagePath>../XML_Server/src/streamers/str1.PNG</imagePath>
                 </metadata>
             </streamer></response>

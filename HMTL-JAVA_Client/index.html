@@ -4,6 +4,7 @@
     <link rel="stylesheet" href="css.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>XML server</title>
 </head>
 <body>
@@ -13,7 +14,7 @@
         </div>
         <div id="info" class="info">
             <div id="video-container">
-                <video id="video"  controls></video>
+                <video id="video" width="800" controls></video>
             </div>
             <div id="text-container">
                 <h1 id="infotitle"></h1>
@@ -24,17 +25,6 @@
     </div>
 </body>
 <!--  Script for video stream  -->
-<script>  var video = document.getElementById("video");
-    var videoSrc = "http://localhost:8080/hls/test.m3u8";
-    if (Hls.isSupported()) {
-      var hls = new Hls();
-      hls.loadSource(videoSrc);
-      hls.attachMedia(video);
-    }
-    else if (video.canPlayType("application/vnd.apple.mpegurl")) {
-      video.src = videoSrc;
-    }
-</script>
 <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
 <script src="script.js"></script>
 </html>

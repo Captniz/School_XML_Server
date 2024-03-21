@@ -429,7 +429,6 @@ public abstract class WebSocketServer extends AbstractWebSocket implements Runna
         } catch (IOException ex) {
           handleIOException(key, null, ex);
         } catch (InterruptedException e) {
-          // FIXME controlled shutdown (e.g. take care of buffermanagement)
           Thread.currentThread().interrupt();
         }
       }

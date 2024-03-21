@@ -60,10 +60,18 @@ ws.onmessage = function(event) {
             document.getElementById("list").appendChild(button);
         });
     }else if(reqType === "#SHOW_STREAM"){
-        var stream = doc.getElementsByTagName("streamer")[0];
-        var videoPath = stream.getElementsByTagName("metadata")[0].getElementsByTagName("streamIp")[0].textContent;
-        //TODO controlla per il setup rtmp
-        showStream(videoPath);
+        var stream = doc.getElementsByTagName("streamer")[0].getElementsByTagName("metadata")[0].getElementsByTagName("streamIp")[0].textContent;
+        
+        var video = document.getElementById("video");
+        
+        if (Hls.isSupported()) {
+            var hls = new Hls();
+            hls.loadSource(stream);
+            hls.attachMedia(video);
+        }else if (video.canPlayType("application/vnd.apple.mpegurl")) {
+            video.src = stream;
+        }
+        showStream();
     }
 };
 
@@ -120,9 +128,6 @@ function showInfo(imagePath,infos,name) {
 function showStream(){
     document.getElementById("text-container").style.display = "none";
     document.getElementById("video-container").style.display = "block";
-
-    var video = document.getElementById("video");
-    video.src = videoPath; //TODO controlla per il setup rtmp
 }
 
 function waitForConnection(interval) {
