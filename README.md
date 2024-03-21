@@ -8,31 +8,34 @@ Il progetto consiste in un server JAVA che riceve un file XML, poi lo invia ad u
 
 ## Todo
 
-- [x] Creare il server RTMP
-- [x] Setup del server RTMP
-  - [x] Setup del server RTMP per trasmissione in HDL
-- [x] Creare XML
-- [x] Creare XSD
-- [ ] Creare Server Java
-  - [x] Connessione e accettazione client
-  - [x] Gestione singolo client
-  - [x] Parsing dei dati XML
-    - [x] Trovo i dati
-    - [x] Creo file di risposta
-    - [x] Valuta se è necessario creare il file RESPONSE XML o posso semplicemente inviare i dati
-- [x] Creare Client Java
-  - [x] Connessione
-  - [x] Trasmissione dei dati tra i due end-point
-- [x] Creare la pagina HTML
-  - [x] CSS  
-  - [x] JS
-    - [ ] Quando chiamo SHOWSTREAM fai si che il server update del numero di user live
+- [x] RTMP
+  - [x] Creare il server RTMP
+  - [x] Setup del server RTMP
+    - [x] Setup del server RTMP per trasmissione in HDL
+- [ ] HTML/JS
+  - [x] CLIENT JAVA
+    - [x] Connessione con XML server
+    - [x] Connessione con JS WebSockets
   - [ ] HTML
     - [ ] Rimpiazza le immagini
-    - [ ] Tasto back che torna ai gruppi
-  - [x] Connessione
-  - [x] Ricezione dei dati dal server
-  - [x] Visualizzazione dei dati  
+    - [ ] Tasto BACK che torna ai gruppi
+  - [x] CSS
+  - [ ] JS
+    - [ ] Quando chiamo SHOWSTREAM fai si che il server update del numero di user live
+- [x] JAVA SERVER
+  - [x] XML + MANAGER
+    - [x] Creare XML
+      - [x] Parsing info XML a RESPONSE
+    - [x] Creare XSD
+  - [x] SERVER MAIN
+    - [x] Connessione e accettazione del client
+  - [x] CLIENT MANAGER
+    - [x] Gestione singolo client
+- [ ] Documentazione
+  - [ ] Documenta
+  - [ ] Dividi in sezioni
+  - [ ] Semplifica
+  - [ ] Finisci README
 
 ## Possibili agginunte
 
