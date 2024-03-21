@@ -119,7 +119,6 @@ public class ClientManager extends Thread {
             out.flush();
         }
         System.out.println("Data sent");
-
     }
 
     /**
