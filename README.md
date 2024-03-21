@@ -9,18 +9,17 @@ Il progetto consiste in un server JAVA che riceve un file XML, poi lo invia ad u
 ## Todo
 
 - [x] Creare il server RTMP
-- [ ] Setup del server RTMP
-  - [ ] Setup del server RTMP per trasmissione in HDL
+- [x] Setup del server RTMP
+  - [x] Setup del server RTMP per trasmissione in HDL
 - [x] Creare XML
 - [x] Creare XSD
 - [ ] Creare Server Java
   - [x] Connessione e accettazione client
   - [x] Gestione singolo client
-  - [ ] Parsing dei dati XML
+  - [x] Parsing dei dati XML
     - [x] Trovo i dati
     - [x] Creo file di risposta
-    - [ ] Valuta se è necessario creare il file RESPONSE XML o posso semplicemente inviare i dati
-      - [ ] Nel caso aggiungi la gestione dei file sul lato ClientManager come nel commento
+    - [x] Valuta se è necessario creare il file RESPONSE XML o posso semplicemente inviare i dati
 - [x] Creare Client Java
   - [x] Connessione
   - [x] Trasmissione dei dati tra i due end-point
@@ -29,14 +28,13 @@ Il progetto consiste in un server JAVA che riceve un file XML, poi lo invia ad u
   - [x] JS
     - [ ] Quando chiamo SHOWSTREAM fai si che il server update del numero di user live
   - [ ] HTML
+    - [ ] Rimpiazza le immagini
     - [ ] Tasto back che torna ai gruppi
   - [x] Connessione
   - [x] Ricezione dei dati dal server
   - [x] Visualizzazione dei dati  
-  - [ ] Rimpiazza le immagini
 
 ## Possibili agginunte
-
 
  - [ ] Chat
  - [ ] Trova un modo per utilizzare il client java
